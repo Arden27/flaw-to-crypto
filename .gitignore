@@ -1,0 +1,25 @@
+# .gitignore
+
+# Ignore compiled Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.bak
+*.swp
+*.DS_Store
+/node_modules
+/dist
+staticfiles/staticfiles_backup/
+/staticfiles
+
+
+
+# Ignore SQLite database file
+*.sqlite3
+
+# Ignore environment files
+.env
+
+bitcoin_prices.txt

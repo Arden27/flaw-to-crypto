@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+{% load static %}
+<head>
+    <title>Flaw to Crypto</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Import Chart.js -->
+    <link rel="stylesheet" type="text/css" href="{% static 'flawtocrypto/css/main.css' %}">
+    <style>
+        /* Global styles */
+        
+    </style>
+
+</head>
+<body>
+    <div class="input-container">
+        <p style="display: flex; align-items: center; gap: 5px;">
+            <span>Investing $</span>
+            <input id="dailyInvestment" type="number" min="0" placeholder="Daily investment in $">
+            <span id="investmentPeriod">per day</span>
+            <span id="investmentDetails"></span>
+        </p>
+    </div>
+    
+    
+    <!--
+    <p id="investmentDetails"></p>
+    -->
+    <div class=sliders-and-chart-container>
+        <div class="slider-container">
+            <div id="slider"></div>
+        </div>
+        
+        <div class="chart-and-slider-container">
+            <div class="chart-container">
+                <canvas id="bitcoinChart"></canvas> <!-- Canvas where the chart will be drawn -->
+            </div>
+            <div class="price-slider-container">
+                <div id="priceSlider"></div>
+                <button id="resetPrice">Reset Price</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var prices = {{ prices|safe }};
+    </script>
+    <script src="{% static 'flawtocrypto/js/main.js' %}"></script>
+</body>
+</html>
