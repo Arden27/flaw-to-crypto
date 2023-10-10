@@ -13,7 +13,7 @@ Flaw to Crypto is a simple web application built with Django and jQuery, that al
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/flawtocrypto.git
+    git clone https://github.com/Arden27/flawtocrypto.git
     ```
 2. Navigate to the project directory:
     ```bash
