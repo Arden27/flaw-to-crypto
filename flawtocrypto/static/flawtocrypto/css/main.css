@@ -22,8 +22,29 @@ body {
     padding: 20px;
 }
 
+.text1 {
+    color: blue;
+    font-weight: bold;
+}
+.text2 {
+    color: green;
+    font-weight: bold;
+}
+.text3 {
+    color: red;
+    font-weight: bold;
+}
+.text4 {
+    color: goldenrod;
+    font-weight: bold;
+}
+.text5 {
+    color: brown;
+    font-weight: bold;
+}
+
 /* Styles specific to the elements */
-.input-container {
+.io-container {
     position: relative;
     height: 10%;
     display: flex;
@@ -31,6 +52,12 @@ body {
     justify-content: center;
     top: 0;
     width: 100%;
+}
+
+.io-string{
+    display: flex; 
+    align-items: center; 
+    gap: 5px;
 }
 
 .slider-container {
@@ -130,6 +157,9 @@ body {
 #dailyInvestment {
     width: 50px;
     transition: width 0.2s ease-in-out;
+    font-weight: bold;
+    color: darkmagenta;
+    font-size: 14px;
 }
 
 /* to remove number input buttons */

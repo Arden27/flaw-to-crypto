@@ -1,52 +1,50 @@
 <!DOCTYPE html>
-
 <html>
-{% load static %}
+{% load static %} <!-- Load Django static files -->
 <head>
     <title>Flaw to Crypto</title>
+    <!-- Load external stylesheets and scripts -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Import Chart.js -->
+    <!-- Load custom stylesheet -->
     <link rel="stylesheet" type="text/css" href="{% static 'flawtocrypto/css/main.css' %}">
-    <style>
-        /* Global styles */
-        
-    </style>
-
+    <!-- Move scripts to head as per modern best practices -->
+    <script>
+        let prices = {{ prices|safe }};
+    </script>
+    <script src="{% static 'flawtocrypto/js/main.js' %}"></script>
 </head>
 <body>
-    <div class="input-container">
-        <p style="display: flex; align-items: center; gap: 5px;">
+    <!-- Input container for user to enter daily investment amount -->
+    <div class="io-container">
+        <p class="io-string">
             <span>Investing $</span>
             <input id="dailyInvestment" type="number" min="0" placeholder="Daily investment in $">
             <span id="investmentPeriod">per day</span>
             <span id="investmentDetails"></span>
         </p>
     </div>
-    
-    
-    <!--
-    <p id="investmentDetails"></p>
-    -->
+
+    <!-- Container for sliders and chart -->
     <div class=sliders-and-chart-container>
+        <!-- Container for date slider -->
         <div class="slider-container">
             <div id="slider"></div>
         </div>
         
+        <!-- Container for chart and price slider -->
         <div class="chart-and-slider-container">
             <div class="chart-container">
                 <canvas id="bitcoinChart"></canvas> <!-- Canvas where the chart will be drawn -->
             </div>
+            <!-- Price slider and reset button -->
             <div class="price-slider-container">
                 <div id="priceSlider"></div>
                 <button id="resetPrice">Reset Price</button>
             </div>
         </div>
     </div>
-    <script>
-        var prices = {{ prices|safe }};
-    </script>
-    <script src="{% static 'flawtocrypto/js/main.js' %}"></script>
 </body>
 </html>

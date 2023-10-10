@@ -1,13 +1,16 @@
+// Ensure the DOM is fully loaded before executing the script
 document.addEventListener("DOMContentLoaded", () => {
+    // Utilize jQuery's ready method to execute the function once the DOM is ready
     $(function() {
-        //let prices = {{ prices|safe }}; // declared in template
+        // Initial slider values and price configurations
         let min = 0;
         let max = prices.length - 1;
         let currentPrice = prices[max][1];
         let priceMin = 0;
         let priceMax = currentPrice * 10;
         let selectedPrice = currentPrice;
-    
+
+        // Function to calculate and display the total investment result based on user input and slider positions
         function calculateTotalInvestment(sliderValue, priceForCalculation) {
             let dailyInvestment = $("#dailyInvestment").val();
             if (dailyInvestment && sliderValue !== max) {
@@ -21,19 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 let totalValue = totalBitcoin * priceForCalculation;
                 let initialInvestment = dailyInvestment * investmentDays;
-                /*
-                $("#totalInvestment").text(`Total value of investment: $${totalValue.toFixed(2)}`);
-                $("#totalBitcoin").text(`Total Bitcoin purchased: ${totalBitcoin.toFixed(8)}`);
-                $("#initialInvestment").text(`Sum of initial investments: $${initialInvestment}`);
-                */
-                //$("#investmentDetails").text(`Investing $${dailyInvestment}/day for ${investmentDays} days ($${initialInvestment} total), you'd now have ${totalBitcoin.toFixed(8)} BTC worth $${totalValue.toFixed(2)} at current rate $${selectedPrice.toFixed(2)}.`);
-    
-                // Update daily investment and the following text
-    
-                $("#dailyInvestment").next().text(`/day for ${investmentDays} days ($${initialInvestment} total), you'd now have ${totalBitcoin.toFixed(8)} BTC worth $${totalValue.toFixed(2)} at current rate $${selectedPrice.toFixed(2)}.`);
+
+                // Update the investment details text
+                $("#dailyInvestment").next().html(`/day for <span class="text1">${investmentDays}</span> days <span class="text2">($${initialInvestment}</span> total), you'd now have <span class="text3">${totalBitcoin.toFixed(8)} BTC</span> worth <span class="text4">$${totalValue.toFixed(2)}</span> at current rate <span class="text5">$${selectedPrice.toFixed(2)}</span>.`);
             }
         }
-    
+
+        // Configure the date slider
         $("#slider").slider({
             range: "max",
             min: min,
@@ -54,9 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 handle.append('<span class="past-price-slider-text"></span>');
             }
         });
-    
+
+        // Flag to track whether the price slider is being dragged
         let draggingPriceSlider = false;
-    
+
+        // Configure the price slider
         $("#priceSlider").slider({
             orientation: "vertical",
             range: "max",
@@ -83,30 +82,26 @@ document.addEventListener("DOMContentLoaded", () => {
                     $(".price-slider-text").fadeOut();
                 }
             }
-            /*
-            stop: function(event, ui) {
-                $(".price-slider-text").fadeOut();
-            }
-            */
         });
-    
+
         // Show price slider text when mouse is over the price slider
         $(".price-slider-container").mouseenter(function() {
             $(this).find(".price-slider-text").stop().fadeIn();
         });
-    
+
         // Hide price slider text when mouse leaves the price slider
         $(".price-slider-container").mouseleave(function() {
             if (!draggingPriceSlider) {
                 $(this).find(".price-slider-text").stop().fadeOut();
             }
         });
-    
+
+        // Update investment calculation and text whenever the daily investment input changes
         $("#dailyInvestment").on("input", function() {
-            let newWidth = $(this).val().length > 1 ? $(this).val().length * 10 + 'px' : '12px';
+            let newWidth = $(this).val().length > 1 ? $(this).val().length * 12 + 'px' : '12px';
             $(this).css('width', newWidth);
             calculateTotalInvestment($("#slider").slider("value"), selectedPrice);
-    
+
             // Update the text based on whether there's input
             if ($(this).val().length > 0 && $("#slider").slider("value") === max) {
                 $("#investmentPeriod").fadeOut(function() {
@@ -120,26 +115,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 calculateTotalInvestment($("#slider").slider("value"), selectedPrice);
             }
         });
-    
-        // Listen for a click event on the reset button
+
+        // Reset the price slider and update the investment calculation when the reset button is clicked
         $("#resetPrice").on("click", function() {
-            // Reset the price slider's value to the current price
             $("#priceSlider").slider("value", currentPrice);
-            // Update the selected price and recalculate the total investment
             selectedPrice = currentPrice;
             calculateTotalInvestment($("#slider").slider("value"), selectedPrice);
-            // Update the handle text of the price slider
             $("#priceSlider").find(".price-slider-text").text(`$${currentPrice.toFixed(2)}`);
         });
-    
+
         // Trigger the slide event to display the initial price
         $("#slider").slider("value", max);
-    
-        // Create chart data
+
+        // Create the chart data arrays
         let chartLabels = prices.map(item => new Date(item[0]).toISOString().split('T')[0]);
         let chartData = prices.map(item => item[1]);
-    
-        // Create chart
+
+        // Create the Bitcoin price chart
         let ctx = document.getElementById('bitcoinChart').getContext('2d');
         let myChart = new Chart(ctx, {
             type: 'line',
