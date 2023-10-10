@@ -1,6 +1,6 @@
 # Flaw to Crypto
 
-Flaw to Crypto is a simple web application built with Django and jQuery, that allows users to speculate on the potential earnings from daily investments in Bitcoin over a specified time period. By inputting a daily investment amount and using sliders to set a time range and Bitcoin price, users can see how much they could have earned.
+Flaw to Crypto is a simple web application built with Django and jQuery, that allows users to speculate on the potential earnings from daily investments in Bitcoin over a specified time period. By inputting a daily investment amount and using sliders to set a time range and Bitcoin price, users can see how much they could have earned. Check out live demo [here](http://artman.pythonanywhere.com/flaws).
 
 ## Features
 
